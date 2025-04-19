@@ -7,9 +7,10 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/auth.guard';
 import { ConfigModule } from '@nestjs/config';
+import { MailModule } from './mail/mail.module';
 
 @Module({
-  imports: [UserModule, PrismaModule, AuthModule, ConfigModule.forRoot({isGlobal: true })],
+  imports: [UserModule, PrismaModule, AuthModule, ConfigModule.forRoot({isGlobal: true }), MailModule],
   controllers: [AppController],
   providers: [
     AppService,

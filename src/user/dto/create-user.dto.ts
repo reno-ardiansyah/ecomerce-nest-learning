@@ -1,5 +1,11 @@
 // src/users/dto/create-user.dto.ts
-import { IsString, IsEmail, IsOptional, MinLength, IsEnum } from 'class-validator';
+import {
+  IsString,
+  IsEmail,
+  IsOptional,
+  MinLength,
+  IsEnum,
+} from 'class-validator';
 
 export enum UserRole {
   ADMIN = 'admin',
@@ -27,4 +33,10 @@ export class CreateUserDto {
     message: `Role must be one of: ${Object.values(UserRole).join(', ')}`,
   })
   role?: UserRole;
+
+  @IsOptional()
+  token?: string;
+
+  @IsOptional()
+  token_expires_at?: Date;
 }

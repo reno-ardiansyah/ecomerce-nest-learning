@@ -16,11 +16,19 @@ export class UserService {
   async create(createUserDto: CreateUserDto) {
     const {password, ...rest} = createUserDto;
     const passwordHashed = await hash(password, 10);
-
+    
     return await this.prisma.users.create({
       data: {
         ...rest,
         password_hash: passwordHashed,
+        profiles: {
+          create: {
+            bio: '',
+            avatar_url: '',
+            birthdate: null,
+            gender: ''
+          }
+        }
       },
     });
   }
@@ -49,6 +57,7 @@ export class UserService {
       where: {
         [typeof identifier === 'number' ? 'id' : 'email']: identifier,
       } as any,
+      include: {profiles: true}
     });
   }
 
